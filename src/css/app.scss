@@ -1,1 +1,41 @@
 // app global css in SCSS form
+body.body--dark {
+  background-color: #3f3f3f; /* koyu gri */
+}
+/* Dark modda kartlar beyaz, yazılar siyah olsun */
+body.body--dark .q-card {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* Dark modda q-input içi yazılar da siyah olsun */
+body.body--dark .q-field__native,
+body.body--dark .q-field__label {
+  color: black !important;
+}
+
+/* Dark modda heading'ler siyah olsun */
+body.body--dark h2,
+body.body--dark .text-h5 {
+  color: black !important;
+}
+
+/* Dark modda q-btn içindeki yazılar siyah olsun */
+body.body--dark .q-btn {
+  color: black !important;
+}
+body.body--dark .about-card {
+  background-color: #000000; /* tam siyah */
+  color: #0a0a0a; /* yazıları açık renk yap */
+}
+
+body.body--dark .lang-card .name {
+  background-color: #000000; /* tam siyah */
+  color: #0a0a0a; /* yazıları açık renk yap */
+}
+body.body--dark .project-title {
+  color: #302f2f;
+}
+body.body--dark h4 {
+  color: #f8f7f7;
+}
