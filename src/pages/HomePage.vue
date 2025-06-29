@@ -330,14 +330,14 @@ function typeEffect() {
 }
 
 const languages = ref([
-  "JavaScript",
-  "TypeScript",
   "Vue.js",
-  "React",
+  "C#",
+  "Python",
+  "PHP",
   "HTML",
   "CSS",
   "Tailwind CSS",
-  "Node.js",
+  ".Net",
 ]);
 
 const contactForm = ref({
