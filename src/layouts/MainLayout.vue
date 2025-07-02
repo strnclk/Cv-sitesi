@@ -13,20 +13,23 @@
   </div>
 
   <!-- Orta: Masaüstü Menü -->
-  <div v-if="!$q.screen.lt.md" class="row items-center q-gutter-x-md">
-    <q-btn
-      v-for="nav in navigation"
-      :key="nav.id"
-      flat
-      no-caps
-      class="text-grey-7"
-      @click="scrollToSection(nav.id)"
-      style="font-size: 0.9rem; letter-spacing: 0.5px"
-    >
-      <q-icon :name="nav.icon" class="q-mr-sm" />
-      {{ $t(nav.labelKey) }}
-    </q-btn>
-  </div>
+  <div v-if="!$q.screen.lt.md" class="row items-center">
+  <q-btn
+    v-for="nav in navigation"
+    :key="nav.id"
+    no-caps
+    unelevated
+    :style="activeSection === nav.id
+      ? 'color: #FFB300; font-weight: bold; border: 1px solid #FFB300; border-radius: 20px; margin: 0 30px; padding: 1px 30px;'
+      : 'color: #757575; border: 1px solid #E0E0E0; border-radius: 20px; margin: 0 30px; padding: 1px 30px;'"
+    @click="scrollToSection(nav.id)"
+  >
+    <q-icon :name="nav.icon" class="q-mr-sm" />
+    {{ $t(nav.labelKey) }}
+  </q-btn>
+</div>
+
+
 
   <!-- Sağ: Dil Seçici, Dark Mode, Menu -->
   <div class="row items-center q-gutter-x-sm">
@@ -126,7 +129,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted,onBeforeUnmount } from "vue";
 import { Dark, useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router"; // useRouter'ı ekledik
 import { useI18n } from "vue-i18n";
@@ -143,6 +146,9 @@ function setLanguage(lang) {
   $i18n.locale = lang;
   localStorage.setItem("appLang", lang);
 }
+
+const activeSection = ref("home");
+
 const navigation = ref([
   { labelKey: "navigation.home", id: "home", icon: "home" },
   { labelKey: "navigation.about", id: "about", icon: "person" },
@@ -235,7 +241,34 @@ onMounted(() => {
       scrollToSection(id);
     }, 300); // Sayfanın tam yüklenmesi için daha uzun bekleme
   }
+
+  window.addEventListener("scroll", handleScroll);
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
+function handleScroll() {
+  const sections = navigation.value.map(nav => document.getElementById(nav.id));
+  const scrollPosition = window.scrollY + 150; // header varsa +150 padding gibi düşün
+
+  for (const section of sections) {
+    if (section) {
+      const offsetTop = section.offsetTop;
+      const offsetHeight = section.offsetHeight;
+
+      if (
+        scrollPosition >= offsetTop &&
+        scrollPosition < offsetTop + offsetHeight
+      ) {
+        activeSection.value = section.id;
+        return;
+      }
+    }
+  }
+}
+
 </script>
 
 <style lang="scss" scoped>
