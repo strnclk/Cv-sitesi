@@ -380,7 +380,7 @@ const projects = [
     ],
     links: [
       { label: "Eski Sürüm", url: "https://qrmenu.fupico.com/" },
-      { label: "Yeni Sürüm", url: "https://karekodqrmenu.com/menu" }
+      { label: "Yeni Sürüm", url: "https://karekodqrmenu.com/" }
     ]
   },
   {
