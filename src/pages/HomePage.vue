@@ -120,51 +120,72 @@
     </div>
 
     <!-- Max width container -->
-    <div class="q-mx-auto" style="max-width: 1400px; padding: 0 24px">
-      <div class="row q-col-gutter-lg q-mt-xl">
-        <div v-for="(project, i) in 3" :key="i" class="col-12 col-md-4">
-          <q-card
-            class="q-pa-md bg-grey-3 flex column justify-between q-rounded-xl"
-            style="height: 100% ;border-radius: 50px"
-          >
-            <!-- Resim -->
-            <div class="q-mb-md">
-               <img
-                src="/image/proje.png"
-                alt="Profil Fotoğrafı"
-                class="proje-img"
-              />
-            </div>
-
-            <!-- Başlık -->
-            <div class="text-h6 text-weight-bold q-mb-xs project-title">
-              {{ $t("projectsPage.projectTitle") }}
-            </div>
-
-            <!-- Kullanılan Diller -->
-            <div class="text-subtitle2 q-mb-sm">
-              {{ $t("projectsPage.usedTechnologies") }}
-            </div>
-            <div class="q-mb-md">
-              <q-chip dense class="q-mr-xs" color="grey-4" text-color="black">
-                HTML
-              </q-chip>
-              <q-chip dense class="q-mr-xs" color="grey-4" text-color="black">
-                CSS
-              </q-chip>
-              <q-chip dense class="q-mr-xs" color="grey-4" text-color="black">
-                JavaScript
-              </q-chip>
-            </div>
-
-            <!-- Buton -->
-            <div class="row justify-end q-mx-md q-my-md">
-              <q-btn round color="amber" icon="open_in_new" />
-            </div>
-          </q-card>
+  <div class="q-mx-auto" style="max-width: 1400px; padding: 0 24px">
+  <div class="row q-col-gutter-lg q-mt-xl">
+    <div v-for="(project, i) in projects" :key="i" class="col-12 col-md-4">
+      <q-card
+        class="q-pa-md bg-grey-3 flex column justify-between q-rounded-xl"
+        style="height: 100%; border-radius: 50px"
+      >
+        <!-- Resim -->
+        <div class="q-mb-md">
+          <img
+            :src="project.image"
+            alt="Proje Görseli"
+            class="proje-img"
+          />
         </div>
-      </div>
+
+        <!-- Başlık -->
+        <div class="text-h6 text-weight-bold q-mb-xs project-title">
+          {{ project.title }}
+        </div>
+
+        <!-- Kullanılan Diller -->
+        <div class="text-subtitle2 q-mb-sm">
+          Kullanılan Teknolojiler:
+        </div>
+        <div class="q-mb-md">
+          <q-chip
+            v-for="(tech, idx) in project.technologies"
+            :key="idx"
+            dense
+            class="q-mr-xs"
+            color="grey-4"
+            text-color="black"
+          >
+            {{ tech }}
+          </q-chip>
+        </div>
+
+        <!-- Açıklama -->
+<div class="text-body2 q-mb-md">
+  <div v-for="(line, idx) in project.description" :key="idx" v-html="`- ${line}`"></div>
+</div>
+
+
+       <!-- Butonlar -->
+<div class="row justify-end q-mx-md q-my-md q-gutter-sm">
+  <q-btn
+    v-for="(btn, bIdx) in project.links"
+    :key="bIdx"
+    :label="btn.label"
+    color="amber-5"
+    unelevated
+    no-caps
+    icon="open_in_new"
+    :href="btn.url"
+    target="_blank"
+    class="text-weight-medium q-px-md q-py-xs"
+    style="border-radius: 18px; transition: all 0.3s;"
+  />
+</div>
+
+      </q-card>
     </div>
+  </div>
+</div>
+
   </q-page>
 
   <!-- 4) İLETİŞİM -->
@@ -214,7 +235,7 @@
             <q-btn
               flat
               class="social-btn"
-              @click="goTo('https://www.figma.com/@sitran')"
+              @click="goTo('https://www.figma.com/design/EtfIFi3HFccvhft9gmlvY3/Cv?node-id=0-1&t=d5odsHEUo4QjzwmP-1')"
             >
               <q-icon name="fab fa-figma" size="md" class="q-mr-sm" />
               <span>Figma</span>
@@ -328,6 +349,57 @@ function typeEffect() {
   }
   setTimeout(typeEffect, isDeleting ? typingSpeed / 2 : typingSpeed);
 }
+
+
+const projects = [
+  {
+    title: "Stok Takip ve Barkod Sistemi",
+    image: "/image/proje.png",
+    technologies: [".NET", "MSSQL", "C#", "Vue.js", "Quasar"],
+    description: [
+      "Barkod okuma ve stok kaydı otomatikleştirildi.",
+      "RESTful API’lerle ekleme, silme ve güncelleme işlemleri geliştirildi.",
+      "Barkod okuma ile anlık ürün sorgulama ve stok kaydı yapıldı.",
+      "Veritabanı işlemleri MSSQL ile yürütüldü.",
+      "<strong>Proje şu an canlıda ve 1 mağaza tarafından kullanılmakta.</strong>"
+    ],
+    links: [
+      { label: "Siteyi Aç", url: "https://tarasat.com/" }
+    ]
+  },
+  {
+    title: "QR Menü - Frontend Geliştirme",
+    image: "/image/proje.png",
+    technologies: ["Vue", "Quasar", "REST API"],
+    description: [
+      "Vue ve Quasar ile frontend geliştirildi.",
+      "REST API’lerden veri çekilerek ürünler dinamik olarak listelendi.",
+      "Kategorilere göre filtreleme ve arama özellikleri sağlandı.",
+      "<strong>Proje şu an canlıda, 3 farklı kafe tarafından kullanılmakta.</strong>",
+      "<strong>Geliştirilmeye devam ediliyor.</strong>"
+    ],
+    links: [
+      { label: "Eski Sürüm", url: "https://qrmenu.fupico.com/" },
+      { label: "Yeni Sürüm", url: "https://karekodqrmenu.com/menu" }
+    ]
+  },
+  {
+    title: "Çocuklara Yapay Zeka Anlatan E-Kitap",
+    image: "/image/proje.png",
+    technologies: ["Tasarım", "E-Kitap", "TÜBİTAK"],
+    description: [
+      "3-6 yaş arası çocuklara yapay zekayı tanıtan bir projedir.",
+      "Görsellerle desteklenen bir e-kitap olarak sunulmuştur.",
+      "Yapay zeka ve internetin hayatımızdaki yerini anlatmayı amaçlar.",
+      "<strong>TÜBİTAK tarafından desteklenmiştir.</strong>"
+    ],
+    links: [
+      { label: "Siteyi Aç", url: "https://tubitak.sitrancelik.com/" }
+    ]
+  }
+];
+
+
 
 const languages = ref([
   "Vue.js",
