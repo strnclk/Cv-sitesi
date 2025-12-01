@@ -18,17 +18,7 @@
           <div class="text-body1 q-mb-sm">
             {{ $t("cv.description") }}
           </div>
-          <q-btn
-            color="amber"
-            text-color="black"
-            icon="description"
-            :label="$t('cv.button')"
-            unelevated
-            rounded
-            class="q-px-md"
-            href="/docs/CV.pdf"
-            target="_blank"
-          />
+         
         </div>
       </div>
 
