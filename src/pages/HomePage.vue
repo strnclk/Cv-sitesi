@@ -62,7 +62,7 @@
         </div>
         <div class="col-auto text-center q-ml-lg">
           <div class="text-h4 text-weight-bold">
-            1<span class="text-h6 text-yellow">+</span>
+            2<span class="text-h6 text-yellow">+</span>
           </div>
           <div class="text-subtitle2">
             {{ $t("aboutPage.experienceYearsLabel") }}
