@@ -13,13 +13,6 @@
         <div class="text-h4 text-weight-medium q-mt-lg">
           {{ typedText }}<span class="cursor">|</span>
         </div>
-
-        <div class="q-mt-xl">
-          <div class="text-body1 q-mb-sm">
-            {{ $t("cv.description") }}
-          </div>
-         
-        </div>
       </div>
 
       <!-- Sağ Kısım - Profil -->
@@ -112,7 +105,7 @@
     <!-- Max width container -->
   <div class="q-mx-auto" style="max-width: 1400px; padding: 0 24px">
   <div class="row q-col-gutter-lg q-mt-xl">
-    <div v-for="(project, i) in projects" :key="i" class="col-12 col-md-4">
+    <div v-for="(project, i) in projects" :key="i" class="col-12 col-sm-6 col-md-3">
       <q-card
         class="q-pa-md bg-grey-3 flex column justify-between q-rounded-xl"
         style="height: 100%; border-radius: 50px"
@@ -179,7 +172,7 @@
   </q-page>
 
   <!-- 4) İLETİŞİM -->
-  <q-page id="contact" class="q-pa-lg">
+  <q-page id="contact" class="q-pa-lg q-mt-xl">
     <!-- Başlık -->
     <div class="text-center q-mb-xl">
       <div class="text-h4 text-weight-bold">{{ $t("contactPage.title") }}</div>
@@ -190,9 +183,9 @@
     </div>
 
     <!-- Ana İçerik -->
-    <div class="row justify-center q-col-gutter-xl">
+    <div class="row justify-center items-center q-col-gutter-xl">
       <!-- Sosyal Medya -->
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-5">
         <q-card flat class="q-pa-lg" style="border-radius: 12px">
           <h2 class="text-h5 text-weight-bold text-black q-mb-lg">
             {{ $t("contactPage.socialMedia") }}
@@ -231,76 +224,39 @@
               <span>Figma</span>
             </q-btn>
           </div>
+        </q-card>
+      </div>
 
-          <q-separator class="q-my-lg" />
-
-          <h2 class="text-h5 text-weight-bold text-black q-mb-lg">
+      <div class="col-12 col-md-5">
+        <q-card flat class="q-pa-md shadow-2" style="border-radius: 12px">
+          <h2 class="text-h6 text-weight-bold text-black q-mb-md">
             {{ $t("contactPage.directContact") }}
           </h2>
-          <div class="q-gutter-y-md">
+
+          <div class="q-gutter-y-sm">
             <div class="row items-center">
               <q-icon name="mail" color="grey-7" class="q-mr-sm" />
               <span class="text-body1">sitran.celik@gmail.com</span>
             </div>
-          </div>
-        </q-card>
-      </div>
 
-      <!-- İletişim Formu -->
-      <div class="col-12 col-md-6">
-        <q-card flat class="q-pa-lg shadow-2" style="border-radius: 12px">
-          <h2 class="text-h5 text-weight-bold text-black q-mb-xl">
-            {{ $t("contactPage.sendMessage") }}
-          </h2>
-
-          <q-form @submit="onSubmit" class="q-gutter-md">
-            <q-input
-              filled
-              v-model="contactForm.name"
-              :label="$t('contactPage.labels.name')"
-              lazy-rules
-              :rules="[(val) => !!val || $t('contactPage.errors.required')]"
-            />
-
-            <q-input
-              filled
-              v-model="contactForm.email"
-              :label="$t('contactPage.labels.email')"
-              type="email"
-              lazy-rules
-              :rules="[
-                (val) => !!val || $t('contactPage.errors.required'),
-                (val) =>
-                  /.+@.+\..+/.test(val) || $t('contactPage.errors.email'),
-              ]"
-            />
-
-            <q-input
-              filled
-              v-model="contactForm.subject"
-              :label="$t('contactPage.labels.subject')"
-            />
-
-            <q-input
-              filled
-              v-model="contactForm.message"
-              :label="$t('contactPage.labels.message')"
-              type="textarea"
-              rows="5"
-              lazy-rules
-              :rules="[(val) => !!val || $t('contactPage.errors.required')]"
-            />
-
-            <div class="text-right">
+            <div class="row q-gutter-sm q-mt-sm">
               <q-btn
-                type="submit"
                 color="warning"
-                :label="$t('contactPage.labels.send')"
-                class="q-px-xl text-black"
-                size="md"
+                text-color="black"
+                unelevated
+                no-caps
+                label="E-posta Gönder"
+                href="mailto:sitran.celik@gmail.com"
+              />
+              <q-btn
+                outline
+                color="grey-8"
+                no-caps
+                label="E-postayı Kopyala"
+                @click="copyEmail"
               />
             </div>
-          </q-form>
+          </div>
         </q-card>
       </div>
     </div>
@@ -386,6 +342,32 @@ const projects = [
     links: [
       { label: "Siteyi Aç", url: "https://tubitak.sitrancelik.com/" }
     ]
+  },
+  {
+    title: "Tabaktan",
+    image: "/image/proje.png",
+    technologies: [
+      ".NET (ASP.NET Core)",
+      "C#",
+      "EF Core",
+      "MSSQL",
+      "React",
+      "TypeScript",
+      "TailwindCSS",
+      "JWT",
+      "REST API",
+      "Docker",
+      "Coolify",
+      "SMTP"
+    ],
+    description: [
+      "Ev yemekleri pazaryeri: Evde yapılan yemekleri satıcılardan alıcılarla buluşturan, kullanıcı-satıcı akışına sahip full-stack platform.",
+      "<strong>Yerel lezzetleri dijital pazara taşıyan, e-posta doğrulama ve gerçek zamanlı mesajlaşma ile güvenli alışveriş deneyimi sunan uygulama.</strong>",
+      "<strong>Docker ile containerize edilip Coolify üzerinden canlı ortama alınmıştır.</strong>"
+    ],
+    links: [
+      { label: "Siteyi Aç", url: "https://tabaktan.com/" }
+    ]
   }
 ];
 
@@ -402,35 +384,12 @@ const languages = ref([
   ".Net",
 ]);
 
-const contactForm = ref({
-  name: "",
-  email: "",
-  subject: "",
-  message: "",
-});
-
 const goTo = (url) => {
   window.open(url, "_blank");
 };
 
-const onSubmit = () => {
-  $q.notify({
-    color: "positive",
-    message: "Mesajınız başarıyla gönderildi!",
-    icon: "check",
-  });
-
-  contactForm.value = {
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  };
-};
-
-
-const openLink = (url) => {
-  window.open(url, '_blank');
+const copyEmail = async () => {
+  await navigator.clipboard.writeText('sitran.celik@gmail.com');
 };
 onMounted(typeEffect);
 </script>

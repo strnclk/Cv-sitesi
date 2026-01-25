@@ -46,13 +46,10 @@
       @update:model-value="changeLanguage"
     >
       <template v-slot:selected-item="scope">
-        <q-icon :name="scope.opt.icon" size="sm" class="q-mr-xs" />
+        <q-icon name="language" size="sm" class="q-mr-xs" />
       </template>
       <template v-slot:option="scope">
         <q-item v-bind="scope.itemProps">
-          <q-item-section avatar>
-            <q-icon :name="scope.opt.icon" />
-          </q-item-section>
           <q-item-section>
             <q-item-label>{{ scope.opt.label }}</q-item-label>
           </q-item-section>
@@ -212,12 +209,12 @@ const languages = [
   {
     label: "Türkçe",
     value: "tr",
-    icon: "img:https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/TR.svg",
+    icon: "translate",
   },
   {
     label: "English",
     value: "en",
-    icon: "img:https://cdn.jsdelivr.net/npm/country-flag-emoji-json@2.0.0/dist/images/GB.svg",
+    icon: "language",
   },
 ];
 
